@@ -157,6 +157,8 @@ public class ProgramMembersBulkExtractInputPlugin extends MarketoBaseInputPlugin
             List<Future> listFutureExportIDs = task.getExtractedProgramIds().get().stream()
                 .map(programId -> {
                     Runnable exportTask = () -> {
+                        logger.info("Starting export task for program ID: {}", programId);
+
                         String exportJobID = restClient.createProgramMembersBulkExtract(fieldNames, programId);
                         restClient.startProgramMembersBulkExtract(exportJobID);
                         int numberRecord;
@@ -182,8 +184,10 @@ public class ProgramMembersBulkExtractInputPlugin extends MarketoBaseInputPlugin
                             while (csvRecords.hasNext()) {
                                 Map<String, String> csvRecord = csvRecords.next();
                                 ObjectNode objectNode = MarketoUtils.OBJECT_MAPPER.valueToTree(csvRecord);
-                                recordImporter.importRecord(new AllStringJacksonServiceRecord(objectNode), pageBuilder);
-                                imported = imported + 1;
+                                if (objectNode != null) {
+                                    recordImporter.importRecord(new AllStringJacksonServiceRecord(objectNode), pageBuilder);
+                                    imported = imported + 1;
+                                }
                             }
 
                             logger.info("Import data for program [{}], job_id [{}] finish.[{}] records imported/total [{}]", programId, exportJobID, imported, numberRecord);
