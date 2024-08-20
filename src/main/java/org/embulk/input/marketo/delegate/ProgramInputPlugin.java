@@ -174,7 +174,7 @@ public class ProgramInputPlugin extends MarketoBaseInputPluginDelegate<ProgramIn
         }
         else {
             nodes = marketoService.getPrograms();
-            logger.info("node: {}", nodes);
+            nodes.forEach(node -> logger.info("node: {}", node));
         }
         return FluentIterable.from(nodes).transform(MarketoUtils.TRANSFORM_OBJECT_TO_JACKSON_SERVICE_RECORD_FUNCTION).iterator();
     }
