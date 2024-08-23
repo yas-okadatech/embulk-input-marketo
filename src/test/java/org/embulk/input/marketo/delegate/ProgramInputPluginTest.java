@@ -263,8 +263,8 @@ public class ProgramInputPluginTest
         expectedCall.test(mockRestClient);
 
         Schema embulkSchema = mapper.getEmbulkSchema();
-        // 17 columns
-        assertEquals(embulkSchema.size(), 17);
+        // 13 columns
+        assertEquals(embulkSchema.size(), 13);
         // verify 3 times the method setLong for column id has been called
         ArgumentCaptor<Long> longArgumentCaptor = ArgumentCaptor.forClass(Long.class);
         Mockito.verify(mockPageBuilder, Mockito.times(3)).setLong(Mockito.eq(embulkSchema.lookupColumn("id")), longArgumentCaptor.capture());
