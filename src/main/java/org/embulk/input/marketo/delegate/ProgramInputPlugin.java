@@ -211,15 +211,11 @@ public class ProgramInputPlugin extends MarketoBaseInputPluginDelegate<ProgramIn
                 .add("description", Types.STRING)
                 .add("createdAt", Types.TIMESTAMP, MarketoUtils.MARKETO_DATE_TIME_FORMAT)
                 .add("updatedAt", Types.TIMESTAMP, MarketoUtils.MARKETO_DATE_TIME_FORMAT)
-                .add("startDate", Types.TIMESTAMP, MarketoUtils.MARKETO_DATE_TIME_FORMAT)
-                .add("endDate", Types.TIMESTAMP, MarketoUtils.MARKETO_DATE_TIME_FORMAT)
                 .add("url", Types.STRING)
                 .add("type", Types.STRING)
                 .add("channel", Types.STRING)
                 .add("folder", Types.JSON)
                 .add("status", Types.STRING)
-                .add("costs", Types.JSON)
-                .add("tags", Types.JSON)
                 .add("workspace", Types.STRING);
         return builder.build();
     }
